@@ -9,8 +9,8 @@ setup()
     echo "Deploying $ARTIFACT_NAME" 
 
     echo "Start the backup at $1"
-    kill $(ps aux | grep 'backup_$1' | awk '{print $2}')
-    nohup java -jar -Dserver.port=$1 -Dname=backup_$1 $ARTIFACT_NAME > logs/backup.log &
+    kill $(ps -A | grep [b]ackup_jar_dpl | awk '{print $1}')
+    nohup java -jar -Dserver.port=$1 -Dname=backup_jar_dpl $ARTIFACT_NAME > logs/backup.log &
 
 
     for (( i=1; i <= $2; i++ ))
@@ -19,11 +19,7 @@ setup()
     curl -X POST localhost:$PORT/actuator/shutdown
     done
 
-    for (( i=1; i <= $2; i++ ))
-    do
-    PORT=`expr $i + $1`
-    kill $(ps aux | grep 'deploy_$PORT' | awk '{print $2}')
-    done
+    kill $(ps -A | grep [d]eploy_jar_dpl | awk '{print $1}')
 
     DATE_TIME_WITHOUT_SPACES=$(date)
     mv deployment/deploy.jar deployment_history/$(echo ${DATE_TIME_WITHOUT_SPACES// /_}).jar
@@ -32,12 +28,12 @@ setup()
     for (( i=1; i <= $2; i++ ))
     do
     PORT=`expr $i + $1`
-    nohup java -jar -Dserver.port=$PORT -Dname=deploy_$PORT deployment/deploy.jar > logs/server$PORT.log &
+    nohup java -jar -Dserver.port=$PORT -Dname=deploy_jar_dpl deployment/deploy.jar > logs/server$PORT.log &
     done
 
     
-    rm $ARTIFACT_NAME
     #echo "curl -X POST localhost:$1/actuator/shutdown"
+    rm $ARTIFACT_NAME
 
 }
 
