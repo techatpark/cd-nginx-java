@@ -25,6 +25,8 @@ setup()
     kill $(ps aux | grep 'deploy_$PORT' | awk '{print $2}')
     done
 
+    DATE_TIME_WITHOUT_SPACES=$(date)
+    mv deployment/deploy.jar deployment_history/$(echo ${DATE_TIME_WITHOUT_SPACES// /_}).jar
     cp $ARTIFACT_NAME deployment/deploy.jar
 
     for (( i=1; i <= $2; i++ ))
@@ -33,8 +35,8 @@ setup()
     nohup java -jar -Dserver.port=$PORT -Dname=deploy_$PORT deployment/deploy.jar > logs/server$PORT.log &
     done
 
-    DATE_TIME_WITHOUT_SPACES=$(date)
-    mv $ARTIFACT_NAME deployment_history/$(echo ${DATE_TIME_WITHOUT_SPACES// /_}).jar
+    
+    rm $ARTIFACT_NAME
     #echo "curl -X POST localhost:$1/actuator/shutdown"
 
 }

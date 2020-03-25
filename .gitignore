@@ -4,4 +4,4 @@ deployment**/
 *.jar
 
 ### MAC ###
-#.DS_Store
+.DS_Store
