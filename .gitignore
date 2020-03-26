@@ -2,6 +2,7 @@
 logs/
 deployment**/
 *.jar
+*.pem
 
 ### MAC ###
 .DS_Store
