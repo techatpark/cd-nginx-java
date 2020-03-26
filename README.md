@@ -1,6 +1,9 @@
 # Contious Deployment with nginx and Spring Boot REST API
 An Experimental POC to learn and optimize the process and techniques of Contious Deployment with nginx and Spring Boot REST API
 
+# Goals
+Vendor neutral approch that expects only virtual machines to provide scalablity and continious deployment
+
 # Steps
 1. Start the Backup Server with current artifact
 2. Shutdown Main Servers
