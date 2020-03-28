@@ -4,8 +4,6 @@
 # JDT-specific (Eclipse Java Development Tools)     
 .classpath
 
-*.java
-
 logs/
 deployment**/
 *.jar
@@ -16,3 +14,4 @@ deployment**/
 
 .vscode
 spring-rest-api/target
+spring-rest-api/src/**

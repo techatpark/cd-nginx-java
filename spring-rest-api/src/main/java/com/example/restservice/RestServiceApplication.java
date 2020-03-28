@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestServiceApplication {
     @RequestMapping("/")
     String home() {
-        return "Hello World 2.0!" ;
+        return "DATETIME";
     }
 
     public static void main(String[] args) {
