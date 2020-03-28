@@ -1,12 +1,14 @@
 # Eclipse Core      
-.project
+spring-rest-api/.project
 
 # JDT-specific (Eclipse Java Development Tools)     
-.classpath
+spring-rest-api/.classpath
+
+
 
 logs/
 deployment**/
-
+*.jar
 *.pem
 
 ### MAC ###
