@@ -7,4 +7,5 @@ deployment**/
 ### MAC ###
 .DS_Store
 
-util.sh
+.vscode
+spring-rest-api/target
