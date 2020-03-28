@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestServiceApplication {
     @RequestMapping("/")
     String home() {
-        return "DATETIME";
+        return "Sat Mar 28 13:16:03 IST 2020";
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Thread.sleep(2000);
+        // Thread.sleep(2000);
         SpringApplication.run(RestServiceApplication.class, args);
     }
 
