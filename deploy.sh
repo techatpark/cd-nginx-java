@@ -18,9 +18,7 @@ setup()
     curl -X POST localhost:$1/actuator/shutdown
     nohup java -jar -Dserver.port=$1 -Dname=backup_jar_dpl deployment/_deploy.jar > logs/backup.log &
 
-    echo "Will wait for backup server to start"
-    sleep 2m
-    echo "Backup server started"
+    while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$1)" != "200" ]]; do curl localhost:$1 ; sleep 5; done
 
     # Stop Main Servers
     for (( i=1; i <= $2; i++ ))
@@ -48,7 +46,6 @@ setup()
     echo "Resume Archivel"
 
     # Archive
-    curl localhost:$1
     curl -X POST localhost:$1/actuator/shutdown
     DATE_TIME_WITHOUT_SPACES=$(date)
     mv deployment/_deploy.jar deployment_history/$(echo ${DATE_TIME_WITHOUT_SPACES// /_}).jar

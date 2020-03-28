@@ -14,7 +14,7 @@ public class RestServiceApplication {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(10000);
         SpringApplication.run(RestServiceApplication.class, args);
     }
 
