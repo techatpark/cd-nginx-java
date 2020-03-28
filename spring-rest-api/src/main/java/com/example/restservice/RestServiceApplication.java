@@ -13,7 +13,8 @@ public class RestServiceApplication {
         return "DATETIME";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        Thread.sleep(2000);
         SpringApplication.run(RestServiceApplication.class, args);
     }
 
