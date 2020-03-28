@@ -6,3 +6,5 @@ deployment**/
 
 ### MAC ###
 .DS_Store
+
+util.sh
