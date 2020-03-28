@@ -13,18 +13,19 @@ setup()
     # Start Backup
     mv $ARTIFACT_NAME deployment/_deploy.jar # Backup
     cp deployment/_deploy.jar deployment/__deploy.jar # Unused
-    echo "Start the backup at $1"
-
-    curl -X POST localhost:$1/actuator/shutdown
+    
+    printf "Starting the backup at $1"
     nohup java -jar -Dserver.port=$1 -Dname=backup_jar_dpl deployment/_deploy.jar > logs/backup.log &
 
-    while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$1)" != "200" ]]; do curl localhost:$1 ; sleep 5; done
+    while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$1)" != "200" ]]; do echo -ne " ." ; sleep 5; done
+
+    printf "\nStarted the backup at $1"
 
     # Stop Main Servers
     for (( i=1; i <= $2; i++ ))
     do
     PORT=`expr $i + $1` 
-    echo "Shutting down $PORT"
+    printf "\nShutting down $PORT"
     curl -X POST localhost:$PORT/actuator/shutdown
     done
 
@@ -36,14 +37,14 @@ setup()
     for (( i=1; i <= $2; i++ ))
     do
     PORT=`expr $i + $1`
-    echo "Starting $PORT"
+    printf "\nStarting $PORT"
     nohup java -jar -Dserver.port=$PORT -Dname=deploy_jar_dpl deployment/deploy.jar > logs/server$PORT.log &
     done
 
 
-    echo "Will wait for archivel"
+    printf "\nWill wait for archivel"
     sleep 2m
-    echo "Resume Archivel"
+    printf "\nResume Archivel"
 
     # Archive
     curl -X POST localhost:$1/actuator/shutdown
