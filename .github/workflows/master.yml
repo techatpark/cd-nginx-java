@@ -24,7 +24,6 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           source: "deploy.sh,nginx.conf"
-          strip_components: 1
       # - name: Deploy
       #   uses: appleboy/ssh-action@master
       #   with:
