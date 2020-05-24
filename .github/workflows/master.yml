@@ -23,8 +23,8 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           KEY: ${{ secrets.KEY }}
         with:
-          source: "tests/a.txt,tests/b.txt"
-          target: "~/test"
+          source: "deploy.sh,nginx.conf"
+          target: ${{ secrets.TARGET_DIR }}
           strip_components: 1
       # - name: Deploy
       #   uses: appleboy/ssh-action@master
