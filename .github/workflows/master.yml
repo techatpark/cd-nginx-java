@@ -22,8 +22,8 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           KEY: ${{ secrets.KEY }}
         with:
-          source: spring-rest-api
-          target: deployments
+          source: "tests/a.txt,tests/b.txt"
+          target: "test"
           strip_components: 1
       # - name: Deploy
       #   uses: appleboy/ssh-action@master
