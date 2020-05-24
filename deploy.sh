@@ -58,7 +58,7 @@ setup()
 # Main body of script starts here
 ###
 reset
-setup 8000 1
+setup $1 $2
 
 # 8000 8001 8002 ...
 
