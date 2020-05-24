@@ -17,13 +17,14 @@ jobs:
     steps:
       - name: Copy Artifacts
         uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.KEY }}
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          port: ${{ secrets.PORT }}
-          source: "deploy.sh,nginx.conf"
+          source: spring-rest-api
+          target: deployments
+          strip_components: 1
       # - name: Deploy
       #   uses: appleboy/ssh-action@master
       #   with:
