@@ -21,8 +21,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
           source: "deploy.sh"
-          target: ${{ secrets.TARGET_DIR }}
           strip_components: 1
       # - name: Deploy
       #   uses: appleboy/ssh-action@master
