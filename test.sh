@@ -1,6 +1,6 @@
 #!/bin/sh
 
-HOST=localhost
+HOST=localhost:8000
 
 # Change RestServiceApplication to return DATE_TIME
 # Simulator for Application Modification
