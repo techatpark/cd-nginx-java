@@ -4,16 +4,16 @@ HOST=localhost:8000
 
 # Change RestServiceApplication to return DATE_TIME
 # Simulator for Application Modification
-sed -i -e "s/DATETIME/$(date)/g" spring-boot-web/src/main/java/com/example/demo/RestServiceApplication.java
-rm spring-boot-web/src/main/java/com/example/demo/*-e
+sed -i -e "s/DATETIME/$(date)/g" spring-test/src/main/java/com/example/demo/RestServiceApplication.java
+rm spring-test/src/main/java/com/example/demo/*-e
 
 #building a jar
-cd spring-boot-web
+cd spring-test
 ./mvnw clean package
 cd ../
 
 #deploy jar
-mv spring-boot-web/target/*.jar .
+mv spring-test/target/*.jar .
 bash deploy.sh 8000 1
 
 RESPONSE=$(curl $HOST) 
