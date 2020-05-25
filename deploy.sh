@@ -30,7 +30,6 @@ setup()
     done
 
     # kill $(ps -A | grep [d]eploy_jar_dpl | awk '{print $1}')
-
     mv deployment/__deploy.jar deployment/deploy.jar
 
     # Start Main Serversnginx
@@ -40,8 +39,7 @@ setup()
     printf "\nStarting $PORT"
     nohup java -jar -Dserver.port=$PORT -Dname=deploy_jar_dpl deployment/deploy.jar > logs/server$PORT.log &
     done
-
-
+    
     printf "\nWill wait for archivel"
     sleep 2m
     printf "\nResume Archivel"

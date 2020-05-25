@@ -1,9 +1,10 @@
 # Eclipse Core      
-spring-rest-api/.project
+spring-boot-web/.project
 
 # JDT-specific (Eclipse Java Development Tools)     
-spring-rest-api/.classpath
-
+spring-boot-web/.classpath
+spring-boot-web/target
+#spring-boot-web/src/**
 
 
 logs/
@@ -15,5 +16,3 @@ deployment**/
 .DS_Store
 
 .vscode
-spring-rest-api/target
-spring-rest-api/src/**

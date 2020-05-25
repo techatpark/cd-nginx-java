@@ -2,20 +2,19 @@
 
 HOST=localhost
 
-#modify the app
-DATE_TIME=$(date)
 # Change RestServiceApplication to return DATE_TIME
-
-sed -i "s+DATETIME+$DATE_TIME+g" spring-rest-api/src/main/java/com/example/restservice/RestServiceApplication.java
+# Simulator for Application Modification
+sed -i -e "s/DATETIME/$(date)/g" spring-boot-web/src/main/java/com/example/demo/RestServiceApplication.java
+rm spring-boot-web/src/main/java/com/example/demo/*-e
 
 #building a jar
-cd spring-rest-api
+cd spring-boot-web
 ./mvnw clean package
 cd ../
 
 #deploy jar
-mv spring-rest-api/target/*.jar .
-bash deploy.sh
+mv spring-boot-web/target/*.jar .
+bash deploy.sh 8000 1
 
 RESPONSE=$(curl $HOST) 
 
