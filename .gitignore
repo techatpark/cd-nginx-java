@@ -9,6 +9,7 @@ deployment**/
 
 .vscode
 
+spring-test/src/main/java
 spring-test/.project
 
 # JDT-specific (Eclipse Java Development Tools)     
