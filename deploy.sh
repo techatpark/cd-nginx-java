@@ -27,6 +27,7 @@ setup()
     PORT=`expr $i + $1` 
     printf "\nShutting down $PORT"
     curl -X POST localhost:$PORT/actuator/shutdown
+    while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$PORT)" == "200" ]]; do echo -ne " ." ; sleep 5; done
     done
 
     # kill $(ps -A | grep [d]eploy_jar_dpl | awk '{print $1}')
@@ -38,11 +39,9 @@ setup()
     PORT=`expr $i + $1`
     printf "\nStarting $PORT"
     nohup java -jar -Dserver.port=$PORT -Dname=deploy_jar_dpl deployment/deploy.jar > logs/server$PORT.log &
+    while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$PORT)" != "200" ]]; do echo -ne " ." ; sleep 5; done
     done
     
-    printf "\nWill wait for archivel"
-    sleep 2m
-    printf "\nResume Archivel"
 
     # Archive
     curl -X POST localhost:$1/actuator/shutdown
