@@ -4,7 +4,7 @@ spring-boot-web/.project
 # JDT-specific (Eclipse Java Development Tools)     
 spring-boot-web/.classpath
 spring-boot-web/target
-spring-boot-web/src/main/java/com/example/demo/RestServiceApplication.java
+spring-boot-web/src/*
 
 
 logs/
@@ -16,4 +16,3 @@ deployment**/
 .DS_Store
 
 .vscode
-spring-boot-web/src/main/java/com/example/demo/RestServiceApplication.java
