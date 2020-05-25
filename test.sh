@@ -5,7 +5,7 @@ DATE_TIME=$(date)
 R_TEXT='return "'$DATE_TIME'";' 
 # Change RestServiceApplication to return DATE_TIME
 # Simulator for Application Modification
-sed -i -e "/return/c $R_TEXT" spring-test/src/main/java/com/example/demo/RestServiceApplication.java
+find . -name 'RestServiceApplication.java' -print0 | xargs -0 sed -i "" "s/DATETIME/$R_TEXT/g"
 # rm spring-test/src/main/java/com/example/demo/*-e
 
 # building a jar
