@@ -11,7 +11,7 @@ public class RestServiceApplication {
 
     @RequestMapping("/")
     String home() {
-return "Mon May 25 11:01:22 IST 2020";
+        return "Mon May 25 11:01:22 IST ";
     }
 
     public static void main(String[] args) throws InterruptedException {
