@@ -2,7 +2,7 @@
 
 docker-compose stop && docker-compose rm -f && docker-compose up -d
 
-HOST=localhost
+HOST=localhost/api
 DATE_TIME=$(date)
 # Change RestServiceApplication to return DATE_TIME
 # Simulator for Application Modification
