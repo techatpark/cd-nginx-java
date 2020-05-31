@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestServiceApplication {
 
-    @RequestMapping("/api")
+    @RequestMapping("/")
     String home() {
+        return "Welcome";
+    }
+
+    @RequestMapping("/api")
+    String api() {
         return "DATETIME";
     }
 
