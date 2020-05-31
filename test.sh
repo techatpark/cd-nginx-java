@@ -19,7 +19,6 @@ git checkout -- spring-test/src/main/java/com/example/demo/RestServiceApplicatio
 
 #deploy jar
 mv spring-test/target/*.jar .
-#kill $(ps -A | grep [j]ava | awk '{print $1}')
 bash deploy.sh 8000 2
 
 RESPONSE=$(curl $HOST) 

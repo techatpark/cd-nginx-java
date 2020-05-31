@@ -3,24 +3,20 @@
 setup()
 {
     mkdir -p deployment
-    mkdir -p deployment_history
     mkdir -p logs
 
     ARTIFACT_NAME=$(ls *.jar)
     
     echo "Deploying $ARTIFACT_NAME" 
 
-    # Start Backup
-    mv $ARTIFACT_NAME deployment/_deploy.jar # Backup
-    cp deployment/_deploy.jar deployment/__deploy.jar # Unused
-    
     printf "Starting the backup at $1"
-    nohup java -jar -Dserver.port=$1 -Dname=backup_jar_dpl deployment/_deploy.jar > logs/backup.log &
+    nohup java -jar -Dserver.port=$1 -Dname=backup_jar_dpl $ARTIFACT_NAME > logs/backup.log &
 
     while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$1)" != "200" ]]; do echo -ne " ." ; sleep 5; done
 
     printf "\nStarted the backup at $1"
 
+    
     # Stop Main Servers
     for (( i=1; i <= $2; i++ ))
     do
@@ -30,8 +26,7 @@ setup()
     while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$PORT)" == "200" ]]; do echo -ne " ." ; sleep 5; done
     done
 
-    # kill $(ps -A | grep [d]eploy_jar_dpl | awk '{print $1}')
-    mv deployment/__deploy.jar deployment/deploy.jar
+    cp $ARTIFACT_NAME deployment/deploy.jar
 
     # Start Main Serversnginx
     for (( i=1; i <= $2; i++ ))
@@ -42,12 +37,11 @@ setup()
     while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:$PORT)" != "200" ]]; do echo -ne " ." ; sleep 5; done
     done
     
-
     # Archive
+    printf "\nStopping the backup at $1"
     curl -X POST localhost:$1/actuator/shutdown
-    DATE_TIME_WITHOUT_SPACES=$(date)
-    mv deployment/_deploy.jar deployment_history/$(echo ${DATE_TIME_WITHOUT_SPACES// /_}).jar
-    # kill $(ps -A | grep [b]ackup_jar_dpl | awk '{print $1}')
+    rm $ARTIFACT_NAME
+    printf "\nStopped the backup at $1"
 
 }
 
