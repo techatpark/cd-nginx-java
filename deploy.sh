@@ -2,6 +2,7 @@
 
 setup()
 {
+    cd $3
     mkdir -p deployment
     mkdir -p logs
 
@@ -81,7 +82,7 @@ setup()
 # Main body of script starts here
 ###
 reset
-setup $1 $2
+setup $1 $2 $3
 
 # 8000 8001 8002 ...
 
