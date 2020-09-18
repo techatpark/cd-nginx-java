@@ -2,7 +2,8 @@
 
 deploy()
 {
-    reset
+    
+    CURRENT_DEPLOY_DIRECTORY=$(ls -d dep-*/)
 
     DEPLOY_DIRECTORY=dep-$(date +"%d-%m-%Y-%H-%M-%S")
 
@@ -35,7 +36,7 @@ deploy()
         else 
         echo "Application is running @ $PORT with Process ID $PID need to be stopped"
         echo "Requesting shutdown @ $PORT"
-        curl -X POST localhost:$PORT/actuator/shutdown
+        curl --max-time 5.5 -X POST localhost:$PORT/actuator/shutdown
         echo "."
         echo "Wait for shutdown @ $PORT"
         sleep $4;    
@@ -56,6 +57,8 @@ deploy()
 
     cd ..
     
+
+    rm -rf $CURRENT_DEPLOY_DIRECTORY
 
     echo "Started below instances" 
     ps aux | grep '[s]erver.port=' | awk '{print $2}'
