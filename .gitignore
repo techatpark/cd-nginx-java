@@ -9,6 +9,8 @@ deployment**/
 
 .vscode
 
+dep-*
+
 spring-test/src/main/java
 spring-test/.project
 

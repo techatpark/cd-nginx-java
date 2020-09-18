@@ -5,6 +5,7 @@ docker-compose stop && docker-compose rm -f && docker-compose up -d
 
 HOST=localhost/api
 DATE_TIME=$(date)
+
 # Change RestServiceApplication to return DATE_TIME
 # Simulator for Application Modification
 find . -name 'RestServiceApplication.java' -print0 | xargs -0 sed -i "" "s/DATETIME/$DATE_TIME/g"
@@ -18,8 +19,13 @@ cd ../
 git checkout -- spring-test/src/main/java/com/example/demo/RestServiceApplication.java
 
 #deploy jar
-mv spring-test/target/*.jar .
-bash deploy.sh 8000 2
+ARTIFACT_NAME=$(ls spring-test/target/*.jar) 
+
+source spring-boot-deploy.sh
+
+deploy $ARTIFACT_NAME 8000 2 10
+
+# rm -rf dep-*
 
 RESPONSE=$(curl $HOST) 
 
